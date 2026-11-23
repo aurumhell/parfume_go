@@ -1,0 +1,24 @@
+{{define "product-cards"}}
+<div class="product-grid-cards">
+    {{range .Products}}
+    <article class="product-card" data-product-id="{{.ID}}" data-price-value="{{.PriceValue}}">
+        <div class="product-visual">
+            <a class="product-card__image" href="/search?q={{.Name}}" aria-label="Подробнее о {{.Name}}">
+                <img src="{{.ImageURL}}" alt="Флакон аромата {{.Name}}" loading="lazy" decoding="async">
+            </a>
+            <span class="product-tag">{{.Tag}}</span>
+            <button class="favorite-toggle" type="button" data-favorite aria-label="Добавить {{.Name}} в избранное" aria-pressed="false">♡</button>
+        </div>
+        <div class="product-card__info">
+            <span class="product-brand">{{.Brand}}</span>
+            <h3><a href="/search?q={{.Name}}">{{.Name}}</a></h3>
+            <span class="product-description">{{.Description}}</span>
+            <strong class="product-price">{{.Price}}</strong>
+        </div>
+        <div class="product-card__actions"><button class="add-cart" type="button" data-add-cart>В корзину <span>+</span></button><a class="product-more" href="/search?q={{.Name}}" aria-label="Найти {{.Name}}">Подробнее ↗</a></div>
+    </article>
+    {{else}}
+    <p class="empty-state">По вашему запросу ничего не найдено. Попробуйте изменить поисковую фразу.</p>
+    {{end}}
+</div>
+{{end}}

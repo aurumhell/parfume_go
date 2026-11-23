@@ -1,0 +1,58 @@
+{{define "content"}}
+<section class="hero">
+    <div class="hero__inner">
+        <p class="eyebrow">ОДОRIS · ИСКУССТВО АРОМАТА</p>
+        <h1>Ароматы,<br><em>которые вдохновляют</em></h1>
+        <p class="hero__description">Оригинальная парфюмерия, нишевые композиции<br class="desktop-break"> и культовые звучания для вашей истории.</p>
+        <div class="hero__actions"><a class="hero__button" href="/catalog">Открыть коллекцию <span>↗</span></a><a class="hero__text-link" href="/about">Мир Odoris</a></div>
+        <div class="hero__signature"><span>01 / 06</span><i></i><span>НАЙДИТЕ СВОЙ АРОМАТ</span></div>
+    </div>
+    <div class="hero__seal" aria-hidden="true"><span>O</span><small>EAU<br>DE<br>PARFUM</small></div>
+</section>
+
+<section class="catalog-preview" aria-labelledby="preview-title">
+    <div class="section-topline">
+        <div><p class="eyebrow">THE ODORIS EDIT</p><h2 id="preview-title">Композиции с характером</h2><p>Откройте ароматы, к которым хочется возвращаться.</p></div>
+        <a href="/catalog">Весь каталог <span aria-hidden="true">↗</span></a>
+    </div>
+    {{template "product-cards" .}}
+</section>
+
+<section class="manifesto">
+    <div class="manifesto__content"><p class="eyebrow">БОЛЬШЕ, ЧЕМ АРОМАТ</p><h2>Ваш аромат —<br><em>ваша подпись.</em></h2><p>Мы выбираем композиции, в которых есть настроение, глубина и индивидуальность. Чтобы каждый вдох напоминал: быть собой — уже искусство.</p><a href="/about">Познакомиться с Odoris <span>↗</span></a></div>
+    <div class="manifesto__visual" role="img" aria-label="Парфюмерная композиция в цветочном оформлении"></div>
+</section>
+
+<section class="advantages" aria-labelledby="advantages-title">
+    <div class="section-heading"><p class="eyebrow">OUR PROMISE</p><h2 id="advantages-title">Внимание — в каждой детали</h2><p>Сервис, который продолжает впечатление от любимого аромата.</p></div>
+    <div class="advantages-grid">
+        {{range .Advantages}}
+        <article class="advantage-card"><span class="advantage-number">{{.Icon}}</span><h3>{{.Title}}</h3><p>{{.Text}}</p></article>
+        {{end}}
+    </div>
+</section>
+
+<section class="reviews" aria-labelledby="reviews-title">
+    <div class="section-heading"><p class="eyebrow">KIND WORDS</p><h2 id="reviews-title">Истории наших клиентов</h2><p>Тёплые слова тех, кто уже нашёл свой аромат.</p></div>
+    <div class="reviews-grid">
+        <article class="review-card"><div class="review-stars" aria-label="5 из 5 звёзд">★★★★★</div><p>«Быстрая доставка и невероятно красивая упаковка. Аромат стал моим новым фаворитом».</p><span>Анна <i>· Москва</i></span></article>
+        <article class="review-card"><div class="review-stars" aria-label="5 из 5 звёзд">★★★★★</div><p>«Помогли выбрать аромат в подарок. Очень внимательный сервис и приятные миниатюры».</p><span>Мария <i>· Казань</i></span></article>
+        <article class="review-card"><div class="review-stars" aria-label="5 из 5 звёзд">★★★★★</div><p>«Люблю открывать новые композиции. Здесь всё продумано — от каталога до получения заказа».</p><span>Екатерина <i>· Санкт-Петербург</i></span></article>
+        <article class="review-card"><div class="review-stars" aria-label="5 из 5 звёзд">★★★★★</div><p>«Заказ приехал аккуратно упакованным. Отдельное спасибо за комплимент внутри».</p><span>Ольга <i>· Екатеринбург</i></span></article>
+    </div>
+    <p class="reviews-note">Отзывы представлены как демонстрационный контент макета.</p>
+</section>
+
+<section class="subscribe" aria-labelledby="subscribe-title">
+    <div class="subscribe__ornament" aria-hidden="true">O</div>
+    <p class="eyebrow">LETTERS FROM ODORIS</p>
+    <h2 id="subscribe-title">Письма с ароматом вдохновения</h2>
+    <p>Новинки, особенные коллекции и немного парфюмерного искусства — без лишнего.</p>
+    {{if .Message}}<p class="form-message" role="status">{{.Message}}</p>{{end}}
+    <form action="/subscribe" method="post" class="subscribe-form">
+        <label class="visually-hidden" for="subscribe-email">Электронная почта</label>
+        <div class="subscribe-form__field"><input id="subscribe-email" type="email" name="email" placeholder="Ваш e-mail" autocomplete="email" required><button type="submit">Подписаться <span>↗</span></button></div>
+        <label class="consent-label"><input type="checkbox" name="consent" value="yes" required><span>Согласен(на) получать уведомления о новинках и акциях.</span></label>
+    </form>
+</section>
+{{end}}

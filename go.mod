@@ -1,3 +1,3 @@
 module github.com/aurumhell/parfume_go
 
-go 1.27.3
+go 1.22

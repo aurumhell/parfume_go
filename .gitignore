@@ -23,3 +23,6 @@ Thumbs.db
 # Env
 .env
 .env.local
+# Local customer/order data
+data/subscribers.csv
+data/orders.csv

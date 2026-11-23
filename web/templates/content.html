@@ -1,0 +1,62 @@
+{{define "content"}}
+{{if or (eq .Title "Корзина") (eq .Title "Избранное")}}
+<section class="page-intro page-intro--compact">
+    <p class="eyebrow">ODORIS · YOUR SELECTION</p>
+    <h1>{{.Title}}</h1>
+    <p>{{.Description}}</p>
+</section>
+<section class="listing-section collection-section" data-collection-page="{{.Collection}}">
+    {{if .Message}}<p class="order-message" role="status">{{.Message}}</p>{{end}}
+    {{if eq .Collection "cart"}}<div class="collection-summary"><span>Ваш выбор</span><strong data-cart-total>0 ₽</strong><small data-collection-count>0 ароматов</small></div>{{end}}
+    {{template "product-cards" .}}
+    <div class="collection-empty" data-collection-empty hidden><span>✧</span><h2>Пока здесь тихо</h2><p>{{if eq .Collection "cart"}}Добавьте в корзину аромат, который вам понравился.{{else}}Отмечайте сердечком композиции, к которым хотите вернуться.{{end}}</p><a class="hero__button" href="/catalog">Перейти в каталог</a></div>
+    {{if eq .Collection "cart"}}
+    <form class="checkout-form" id="checkout-form" action="/checkout" method="post" hidden>
+        <div class="checkout-form__heading"><p class="eyebrow">CHECKOUT</p><h2>Оформление заказа</h2><p>Оставьте контактные данные, и мы свяжемся с вами для подтверждения заказа.</p></div>
+        <input type="hidden" name="products" id="checkout-products" value="">
+        <div class="checkout-form__grid">
+            <label>Имя<input name="name" type="text" autocomplete="name" placeholder="Ваше имя" maxlength="120" required></label>
+            <label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="40" required></label>
+            <label>E-mail<input name="email" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+            <label>Способ доставки<select name="delivery" required><option value="" selected disabled>Выберите способ</option><option value="courier">Курьером до двери</option><option value="pickup">В пункт выдачи</option></select></label>
+            <label class="checkout-address">Адрес доставки<input name="address" type="text" autocomplete="street-address" placeholder="Город, улица, дом, квартира или пункт выдачи" maxlength="500" required></label>
+        </div>
+        <div class="checkout-form__bottom"><p>Бесплатная доставка при заказе от 5 000 ₽. Оплата при получении; детали доставки уточним при подтверждении.</p><button type="submit" class="hero__button">Подтвердить заказ <span>↗</span></button></div>
+    </form>
+    {{end}}
+</section>
+{{else if eq .Title "Личный кабинет"}}
+<section class="page-intro page-intro--compact">
+    <p class="eyebrow">ODORIS · PERSONAL SPACE</p><h1>Ваш <em>профиль</em></h1><p>{{.Description}}</p>
+</section>
+<section class="profile-section">
+    <form class="profile-form" id="profile-form">
+        <p class="eyebrow">YOUR DETAILS</p><h2>Контактные данные</h2>
+        <label for="profile-name">Как к вам обращаться</label><input id="profile-name" name="name" type="text" placeholder="Ваше имя" autocomplete="name" required>
+        <label for="profile-email">Электронная почта</label><input id="profile-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+        <button type="submit" class="hero__button">Сохранить на устройстве <span>↗</span></button><p class="profile-status" id="profile-status" role="status"></p>
+    </form>
+    <div class="profile-aside"><span>O</span><h3>Личное пространство</h3><p>Контактные данные сохраняются только в локальном хранилище вашего браузера и не отправляются на сервер.</p></div>
+</section>
+{{else}}
+<section class="page-intro page-intro--content">
+    <p class="eyebrow">ODORIS · {{.Title}}</p>
+    <h1>{{if eq .Title "О нас"}}Пространство <em>аромата</em>{{else}}{{.Title}}{{end}}</h1>
+    <p class="content-description">{{.Description}}</p>
+    {{if eq .Title "Доставка"}}
+    <div class="content-points">
+        <article><strong>01</strong><h2>Курьером</h2><p>Доставка до двери в удобное для вас время.</p></article>
+        <article><strong>02</strong><h2>В пункт выдачи</h2><p>Выберите удобный пункт при оформлении заказа.</p></article>
+        <article><strong>03</strong><h2>Бесплатно от 5 000 ₽</h2><p>При заказе от указанной суммы доставка за наш счёт.</p></article>
+    </div>
+    {{else if eq .Title "О нас"}}
+    <div class="content-points">
+        <article><strong>01</strong><h2>Подлинность</h2><p>Оригинальные ароматы от проверенных поставщиков.</p></article>
+        <article><strong>02</strong><h2>Внимание к деталям</h2><p>Помогаем найти композицию под ваш вкус и настроение.</p></article>
+        <article><strong>03</strong><h2>Открытия</h2><p>Знакомим с нишевой парфюмерией и культовыми брендами.</p></article>
+    </div>
+    {{end}}
+    <a class="hero__button" href="/catalog">Перейти в каталог <span>↗</span></a>
+</section>
+{{end}}
+{{end}}

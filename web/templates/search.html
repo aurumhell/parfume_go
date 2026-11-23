@@ -1,0 +1,10 @@
+{{define "content"}}
+<section class="page-intro page-intro--compact">
+    <p class="eyebrow">ODORIS · SEARCH</p>
+    <h1>Результаты <em>поиска</em></h1>
+    {{if .Query}}<p>По запросу «{{.Query}}»</p>{{else}}<p>Введите название аромата или бренда в строку поиска.</p>{{end}}
+</section>
+<section class="listing-section">
+    {{template "product-cards" .}}
+</section>
+{{end}}

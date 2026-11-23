@@ -1,0 +1,92 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#172f26">
+    <meta name="description" content="Odoris — пространство оригинальной парфюмерии, нишевых и культовых ароматов.">
+    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/aurumhell/Odoris/main/assets/favicon/favicon.svg">
+    <title>{{.Title}} — Odoris</title>
+    <link rel="stylesheet" href="/static/main.css?v=3">
+    <script src="/static/main.js?v=3" defer></script>
+</head>
+<body>
+<div class="topline"><span>ОДОRIS · ПАРФЮМЕРНОЕ ПРОСТРАНСТВО</span><span>Бесплатная доставка от 5 000 ₽</span></div>
+<header class="site-header">
+    <a class="logo" href="/" aria-label="Odoris — главная"><span>ODORIS</span><small>PARFUMERIE</small></a>
+
+    <nav class="primary-links" aria-label="Разделы сайта">
+        <a href="/catalog">Каталог</a>
+        <a href="/new">Новинки</a>
+        <a href="/about">О нас</a>
+        <a href="/delivery">Доставка</a>
+    </nav>
+
+    <form class="search-form" action="/search" method="get" role="search">
+        <label class="visually-hidden" for="site-search">Поиск по каталогу</label>
+        <input id="site-search" type="search" name="q" placeholder="Аромат или бренд" value="{{.Query}}">
+        <button type="submit" aria-label="Найти"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.7"></circle><path d="m16 16 5 5"></path></svg></button>
+    </form>
+
+    <nav class="header-actions" aria-label="Личный раздел">
+        <a class="icon-link" href="/favorites" aria-label="Избранное" title="Избранное">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
+            <span class="count-badge" data-favorites-count>0</span>
+        </a>
+        <a class="icon-link" href="/cart" aria-label="Корзина" title="Корзина">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18l-1.5 13h-15L3 7Z"/><path d="M8 7a4 4 0 0 1 8 0" class="icon-cutout"/></svg>
+            <span class="count-badge" data-cart-count>0</span>
+        </a>
+        <a class="icon-link profile-link" href="/profile" aria-label="Личный кабинет" title="Личный кабинет">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4.1 3.5-6.2 8-6.2s7.2 2.1 8 6.2"/></svg>
+        </a>
+    </nav>
+
+    <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="menu-backdrop" data-menu-close></div>
+<aside class="site-menu" id="site-menu" aria-hidden="true" inert>
+    <div class="site-menu__heading">
+        <div><small>ОДОRIS · НАВИГАЦИЯ</small><span>{{.Current}}</span></div>
+        <button class="menu-close" type="button" aria-label="Закрыть меню" data-menu-close>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+        </button>
+    </div>
+    <nav aria-label="Главная навигация">
+        <ul class="menu-list">
+            <li><a href="/">Главная <span>01</span></a></li>
+            {{range .Navigation}}
+            <li><a href="{{.URL}}"{{if eq $.Current .Title}} aria-current="page"{{end}}>{{.Title}} <span>{{.Key}}</span></a></li>
+            {{end}}
+            <li><a href="/favorites">Избранное <span>♡</span></a></li>
+            <li><a href="/cart">Корзина <span>↗</span></a></li>
+            <li><a href="/profile">Личный кабинет <span>↗</span></a></li>
+        </ul>
+    </nav>
+    <p class="menu-note">Найдите аромат, который будет говорить за вас.</p>
+</aside>
+
+<main>
+    {{template "content" .}}
+</main>
+
+<footer class="site-footer">
+    <div class="footer-main">
+        <div class="footer-brand">
+            <a class="footer-logo" href="/">ODORIS</a>
+            <p>Ароматы, которые вдохновляют.<br>Искусство быть собой.</p>
+        </div>
+        <div class="footer-column"><span>Исследовать</span><a href="/catalog">Каталог</a><a href="/new">Новинки</a><a href="/about">О нас</a></div>
+        <div class="footer-column"><span>Помощь</span><a href="/delivery">Доставка и оплата</a><a href="/favorites">Избранное</a><a href="/cart">Корзина</a></div>
+        <div class="footer-contact"><span>Остаёмся на связи</span><p>Вопросы о выборе аромата и заказе — мы рядом.</p><a href="mailto:hello@odoris.example">hello@odoris.example</a></div>
+    </div>
+    <div class="footer-bottom"><small>© {{nowYear}} Odoris. Все права защищены.</small><small>PARFUMERIE · MADE FOR YOUR STORY</small></div>
+</footer>
+<div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+</body>
+</html>
+{{end}}
