@@ -1,11 +1,4 @@
 {{define "content"}}
-<section class="page-intro">
-    <p class="eyebrow">ODORIS · THE COLLECTION</p>
-    <h1>Каталог <em>ароматов</em></h1>
-    <p>Подберите звучание, которое расскажет вашу историю.</p>
-    <span class="page-intro__count">{{len .Products}} КОМПОЗИЦИЙ · ОТКРОЙТЕ СВОЮ</span>
-</section>
-<section class="listing-section">
-    {{template "product-cards" .}}
-</section>
+<section class="page-intro"><p class="eyebrow">ODORIS · THE COLLECTION</p><h1>Каталог <em>ароматов</em></h1><p>Подберите звучание, которое расскажет вашу историю.</p><span class="page-intro__count">{{len .Products}} КОМПОЗИЦИЙ · ОТКРОЙТЕ СВОЮ</span></section>
+<section class="listing-section">{{template "product-cards" .}}</section>
 {{end}}

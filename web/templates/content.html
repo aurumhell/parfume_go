@@ -32,28 +32,22 @@
 <section class="profile-section">
     <form class="profile-form" id="profile-form">
         <p class="eyebrow">YOUR DETAILS</p><h2>Контактные данные</h2>
-        <label for="profile-name">Как к вам обращаться</label><input id="profile-name" name="name" type="text" placeholder="Ваше имя" autocomplete="name" required>
-        <label for="profile-email">Электронная почта</label><input id="profile-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
-        <button type="submit" class="hero__button">Сохранить на устройстве <span>↗</span></button><p class="profile-status" id="profile-status" role="status"></p>
+        <label for="profile-name">Как к вам обращаться</label><input id="profile-name" name="name" type="text" value="{{.ProfileName}}" placeholder="Ваше имя" autocomplete="name" required>
+        <label for="profile-email">Электронная почта</label><input id="profile-email" name="email" type="email" value="{{.ProfileEmail}}" placeholder="name@example.com" autocomplete="email" required>
+        <button type="submit" class="hero__button">Сохранить данные <span>↗</span></button><p class="profile-status" id="profile-status" role="status"></p>
     </form>
-    <div class="profile-aside"><span>O</span><h3>Личное пространство</h3><p>Контактные данные сохраняются только в локальном хранилище вашего браузера и не отправляются на сервер.</p></div>
+    <div class="profile-aside"><span>O</span><h3>Личное пространство</h3><p>Контактные данные сохраняются в базе данных сайта в рамках анонимной сессии браузера.</p></div>
 </section>
 {{else}}
 <section class="page-intro page-intro--content">
     <p class="eyebrow">ODORIS · {{.Title}}</p>
     <h1>{{if eq .Title "О нас"}}Пространство <em>аромата</em>{{else}}{{.Title}}{{end}}</h1>
     <p class="content-description">{{.Description}}</p>
-    {{if eq .Title "Доставка"}}
+    {{if .PagePoints}}
     <div class="content-points">
-        <article><strong>01</strong><h2>Курьером</h2><p>Доставка до двери в удобное для вас время.</p></article>
-        <article><strong>02</strong><h2>В пункт выдачи</h2><p>Выберите удобный пункт при оформлении заказа.</p></article>
-        <article><strong>03</strong><h2>Бесплатно от 5 000 ₽</h2><p>При заказе от указанной суммы доставка за наш счёт.</p></article>
-    </div>
-    {{else if eq .Title "О нас"}}
-    <div class="content-points">
-        <article><strong>01</strong><h2>Подлинность</h2><p>Оригинальные ароматы от проверенных поставщиков.</p></article>
-        <article><strong>02</strong><h2>Внимание к деталям</h2><p>Помогаем найти композицию под ваш вкус и настроение.</p></article>
-        <article><strong>03</strong><h2>Открытия</h2><p>Знакомим с нишевой парфюмерией и культовыми брендами.</p></article>
+        {{range .PagePoints}}
+        <article><strong>{{.Number}}</strong><h2>{{.Title}}</h2><p>{{.Text}}</p></article>
+        {{end}}
     </div>
     {{end}}
     <a class="hero__button" href="/catalog">Перейти в каталог <span>↗</span></a>
